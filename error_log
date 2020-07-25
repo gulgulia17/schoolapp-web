@@ -1,0 +1,6 @@
+[13-Jun-2020 12:29:58 UTC] PHP Warning:  require(/home/schoolapp/public_html/home/vendor/autoload.php): failed to open stream: No such file or directory in /home/schoolapp/public_html/home/artisan on line 18
+[13-Jun-2020 12:29:58 UTC] PHP Fatal error:  require(): Failed opening required '/home/schoolapp/public_html/home/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/schoolapp/public_html/home/artisan on line 18
+[13-Jun-2020 12:30:12 UTC] PHP Warning:  require(/home/schoolapp/public_html/home/vendor/autoload.php): failed to open stream: No such file or directory in /home/schoolapp/public_html/home/artisan on line 18
+[13-Jun-2020 12:30:12 UTC] PHP Fatal error:  require(): Failed opening required '/home/schoolapp/public_html/home/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/schoolapp/public_html/home/artisan on line 18
+[13-Jun-2020 12:30:21 UTC] PHP Warning:  require(/home/schoolapp/public_html/home/vendor/autoload.php): failed to open stream: No such file or directory in /home/schoolapp/public_html/home/artisan on line 18
+[13-Jun-2020 12:30:21 UTC] PHP Fatal error:  require(): Failed opening required '/home/schoolapp/public_html/home/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/schoolapp/public_html/home/artisan on line 18
