@@ -97,6 +97,7 @@ class PagesController extends Controller
             "subject" => "required",
             "message" => "required",
             "logo" => "required",
+             "phone" => "required",
         ]));
         $dataBack->ticket = '#' . $dataBack->id . '-' . date('dmyHis');
         $dataBack->save();
@@ -111,7 +112,7 @@ class PagesController extends Controller
         $data->logo = 'images/purchaseRequest/' . $imageName;
         $data->save();
     }
-
+    
     public function purchaseCreate()
     {
         return view('purchasestore');
