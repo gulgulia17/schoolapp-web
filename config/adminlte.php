@@ -243,6 +243,10 @@ return [
             'text'    => 'Purchase Request',
             'route'  => 'purchaseRequest',
         ],
+        [
+            'text'    => 'Order History',
+            'route'  => 'admin.orderHistory',
+        ],
         ['header' => 'COMPLAINTS'],
         [
             'text'    => 'User Complaints',

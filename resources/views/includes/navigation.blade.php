@@ -31,7 +31,8 @@
                     <li class="nav-item {{ Request::is('about') ? 'active' : '' }}"><a href="about" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="https://itplus.co.in/" target="_blank" class="nav-link">Developer</a></li>
                     <li class="nav-item {{ Request::is('contact') ? 'active' : '' }}"><a href="contact" class="nav-link">Contact</a></li>
-                    <li class="nav-item {{ Route::is('purchase') ? 'active' : '' }}"><a href="{{route('purchase')}}" class="nav-link">Purchase</a></li>
+                    <li class="nav-item {{ Route::is('purchase') ? 'active' : '' }}"><a href="{{route('purchase')}}" class="nav-link">Purchase Request</a></li>
+                    <li class="nav-item {{ Route::is('purchasesubscription') ? 'active' : '' }}"><a href="{{route('purchasesubscription')}}" class="nav-link">Purchase</a></li>
                     <li class="nav-item {{ Route::is('complaint') ? 'active' : '' }}"><a href="{{route('complaint')}}" class="nav-link">Complaint</a></li>
                 </ul>
             </div>

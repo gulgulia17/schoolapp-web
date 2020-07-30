@@ -19,7 +19,9 @@ Route::get('/index', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/contact', 'PagesController@contact');
 Route::get('/purchase', 'PagesController@purchase')->name('purchase');
+Route::get('/purchasesubscription', 'PagesController@purchasecreate')->name('purchasesubscription');
 Route::get('complaint', 'PagesController@complaint')->name('complaint');
+
 
 Auth::routes();
 /**
@@ -32,6 +34,8 @@ Route::POST('/disctrict', 'PagesController@disctrict')->name('disctrict');
 Route::POST('/purchase', 'PagesController@storePurchase');
 Route::POST('complaint', 'PagesController@postComplaint');
 Route::POST('sendmessage', 'MessageController@store');
+Route::POST('payment','PaytmController@index')->name('payment');
+Route::POST('paymentstatus','PaytmController@status')->name('status');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -43,6 +47,7 @@ Route::group(['middleware' => ['web', 'auth',]], function () {
     Route::get('admin/pages/about', 'Admin\AboutController@index')->name('admin.pages.about');
     Route::get('admin/pages/contact', 'Admin\ContactDetailController@index')->name('admin.pages.contact');
     Route::get('admin/pages/gretting', 'Admin\GrettingController@index')->name('admin.pages.gretting');
+    Route::get('admin/orderhistory', 'HomeController@orderHistory')->name('admin.orderHistory');
     
     Route::post('admin/pages/about', 'Admin\AboutController@store');
     Route::post('admin/pages/contact', 'Admin\ContactDetailController@store');
@@ -57,4 +62,5 @@ Route::group(['middleware' => ['web', 'auth',]], function () {
     Route::resource('botmessage', 'Admin\BotMessageController', ['except' => ['show']]);
     Route::get('message', 'MessageController@index')->name('message');
     Route::post('/cleartable', 'MessageController@cleartable');
+    Route::patch('/changestatus/{id}', 'HomeController@changeStatus');
 });

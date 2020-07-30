@@ -1,5 +1,6 @@
 @extends('main')
 @section('content')
+@if (!empty($herosection))
 <section class="hero-wrap" style="background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0.9)), url({{asset($herosection->image)}});" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
@@ -16,6 +17,7 @@
         </div>
     </div>
 </section>
+@endif
 <section class="ftco-section ftco-no-pt mt-5 mt-md-0">
     <div class="container">
         <div class="row">
@@ -35,6 +37,7 @@
         </div>
     </div>
 </section>
+@if (!empty($counter))
 <section class="ftco-counter ftco-section ftco-no-pt ftco-no-pb img bg-light" id="section-counter">
     <div class="container">
         <div class="row">
@@ -89,6 +92,8 @@
         </div>
     </div>
 </section>
+
+@endif
 <section class="ftco-section testimony-section ftco-no-pb mb-5">
     <div class="img img-bg border" style="background-image: url(images/bg_4.jpg);"></div>
     <div class="overlay"></div>

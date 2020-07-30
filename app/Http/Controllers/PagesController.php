@@ -111,4 +111,9 @@ class PagesController extends Controller
         $data->logo = 'images/purchaseRequest/' . $imageName;
         $data->save();
     }
+
+    public function purchaseCreate()
+    {
+        return view('purchasestore');
+    }
 }
