@@ -74,6 +74,7 @@
                 url: url,
                 data: {_token:_token,_method:_method,statuss:value},
                 success: function (response) {
+                    alert('Your Action Saved!!');
                     console.log(response);
                     // const { interest, total, loanamount, closing } = JSON.parse(response);
                     // $(`#label${id}`).html(interest);

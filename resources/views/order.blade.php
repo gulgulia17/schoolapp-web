@@ -20,7 +20,6 @@
                                 <th>Order number</th>
                                 <td>
                                     {{$response['ORDERID']}} <br>
-                                    <small class="text-danger">Please Note Down your order id</small>
                                 </td>
                             </tr>
                             <tr>
