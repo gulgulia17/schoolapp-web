@@ -24,18 +24,28 @@ class PaytmController extends Controller
      */
     public function index(Request $request)
     {
+        switch ($request->subscription) {
+            case 'PlanA':
+                $amount = "7000";
+                break;
+            case 'PlanB':
+                    $amount = "14000";
+                break;
+            default:
+                return back()->with('error', 'Something Wrong');
+        }
         $order = 'SchoolApp'.rand(111111, 999999).'@'.$request->subscription.date('d');
         $data = [
             "CUST_ID" => rand(111111, 999999),
             "INDUSTRY_TYPE_ID" => "Retail",
             "CHANNEL_ID" => 'WEB',
-            "TXN_AMOUNT" => $request->subscription,
             "MID" => PAYTM_MERCHANT_MID,
             "WEBSITE" => PAYTM_MERCHANT_WEBSITE,
             "CALLBACK_URL" => route('status'),
             "MOBILE_NO" =>  $request->phone,
             "EMAIL" =>  $request->email,
         ];
+        $data['TXN_AMOUNT'] = $amount;
         $data['ORDER_ID'] = $order;
         $data['CHECKSUMHASH'] = getChecksumFromArray($data, PAYTM_MERCHANT_KEY);
          $response = $request->validate([

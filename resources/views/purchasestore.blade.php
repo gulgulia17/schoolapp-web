@@ -26,6 +26,14 @@
                         <div class="col-md-12">
                             <div class="contact-wrap w-100 p-md-5 p-4">
                                 <h3 class="mb-4">Subscription of School App</h3>
+                                @if (session('error'))
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{ session('error') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
                                 <form method="POST" id="contactForm" name="contactForm" class="contactForm" action="{{route('payment')}}" >
                                     @csrf
                                     <div class="row">
@@ -61,8 +69,8 @@
                                                 <label class="label" for="subscription">Subscription</label>
                                                 <select name="subscription" class="form-control" id="Subscription">
                                                     <option value="">Please Choose Plan</option>
-                                                    <option value="7000">1 Year @ 7000</option>
-                                                    <option value="14000">2 Year @ 14000</option>
+                                                    <option value="PlanA">1 Year @ 7000</option>
+                                                    <option value="PlanB">2 Year @ 14000</option>
                                                 </select>
                                                 @error('subscription')
                                                     <span class="text-danger error">*{{$message}}</span>
