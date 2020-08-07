@@ -67,10 +67,11 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="label" for="subscription">Subscription</label>
-                                                <select name="subscription" class="form-control" id="Subscription">
+                                                <select name="subscription" class="form-control" id="subscription">
                                                     <option value="">Please Choose Plan</option>
-                                                    <option value="PlanA">1 Year @ 7000</option>
-                                                    <option value="PlanB">2 Year @ 14000</option>
+                                                    @foreach ($plan as $item)
+                                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('subscription')
                                                     <span class="text-danger error">*{{$message}}</span>
@@ -86,6 +87,8 @@
                                         </div>
                                     </div>
                                 </form>
+                                <div class="col-md-12 jqueryReture">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -94,4 +97,24 @@
         </div>
     </div>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#subscription").change(function(){
+            const _token = $('input[name="_token"]').val();
+            const option = $(this).val();
+            $('.jqueryRetureCard').remove();
+            $.ajax({
+                type: "post",
+                url: "/checkpurchase",
+                data: {'option':option,'_token':_token},
+                success: function (result) {
+                    console.log(result);
+                    var html='<div class="card jqueryRetureCard"><div class="card-header"><div class="row"><div class="col-md-6 text-left">'+result.name+'</div><div class="col-md-6 text-right">Price : '+result.amount+'</div></div></div><div class="card-body"><p>'+result.desc+'</p>'+result.features+'</div></div>';
+                    $('.jqueryReture').append(html);
+               }
+           });
+        });
+    });
+</script>
 @endsection

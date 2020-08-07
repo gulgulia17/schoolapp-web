@@ -356,6 +356,7 @@ return [
         ],
         [
             'text'    => 'Bot Message',
+            'active' => ['botmessage', 'botmessage', 'botmessage/*', 'regex:@^botmessage/[0-9]+$@'],
             'submenu' => [
                 [
                     'text' => 'Show ALL Bot Message',
@@ -364,6 +365,20 @@ return [
                 [
                     'text' => 'Add New Bot Message',
                     'route'  => 'botmessage.create',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Plan Create',
+            'active' => ['plans', 'plans', 'plans/*', 'regex:@^plans/[0-9]+$@'],
+            'submenu' => [
+                [
+                    'text' => 'Show ALL',
+                    'route'  => 'plans.index',
+                ],
+                [
+                    'text' => 'Create New Plans',
+                    'route'  => 'plans.create',
                 ],
             ],
         ],

@@ -36,6 +36,7 @@ Route::POST('complaint', 'PagesController@postComplaint');
 Route::POST('sendmessage', 'MessageController@store');
 Route::POST('payment','PaytmController@index')->name('payment');
 Route::POST('paymentstatus','PaytmController@status')->name('status');
+Route::POST('/checkpurchase','PagesController@purchaseCheck');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -60,6 +61,7 @@ Route::group(['middleware' => ['web', 'auth',]], function () {
     Route::resource('topfeatures', 'Admin\TopFeaturesController', ['except' => ['show']]);
     Route::resource('counter', 'Admin\CounterController', ['except' => ['show', 'delete']]);
     Route::resource('botmessage', 'Admin\BotMessageController', ['except' => ['show']]);
+    Route::resource('plans', 'Admin\PlansController', ['except' => ['show']]);
     Route::get('message', 'MessageController@index')->name('message');
     Route::post('/cleartable', 'MessageController@cleartable');
     Route::patch('/changestatus/{id}', 'HomeController@changeStatus');

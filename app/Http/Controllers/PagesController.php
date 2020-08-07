@@ -7,6 +7,7 @@ use App\Contact;
 use App\District;
 use App\Complaint;
 use App\Admin\About;
+use App\Admin\Plans;
 use App\Admin\Counter;
 use App\Admin\Gretting;
 use App\PurchaseRequest;
@@ -115,6 +116,13 @@ class PagesController extends Controller
     
     public function purchaseCreate()
     {
-        return view('purchasestore');
+        $plan = Plans::where('status', 1)->get();
+        return view('purchasestore', compact('plan'));
+    }
+
+    public function purchaseCheck()
+    {
+        $option = Plans::where('id', Request()->option)->first();
+        return $option;
     }
 }

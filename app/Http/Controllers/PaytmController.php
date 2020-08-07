@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Paytm;
+use App\Admin\Plans;
 use App\orderHistory;
 use App\Mail\OrderPlaceMail;
 use Illuminate\Http\Request;
@@ -24,15 +25,9 @@ class PaytmController extends Controller
      */
     public function index(Request $request)
     {
-        switch ($request->subscription) {
-            case 'PlanA':
-                $amount = "7000";
-                break;
-            case 'PlanB':
-                    $amount = "14000";
-                break;
-            default:
-                return back()->with('error', 'Something Wrong');
+        $amount = Plans::where('id', $request->subscription)->first();
+        if(empty($amount)){
+             return back()->with('error', 'Something Wrong');
         }
         $order = 'SchoolApp'.rand(111111, 999999).'@'.$request->subscription.date('d');
         $data = [
@@ -45,7 +40,7 @@ class PaytmController extends Controller
             "MOBILE_NO" =>  $request->phone,
             "EMAIL" =>  $request->email,
         ];
-        $data['TXN_AMOUNT'] = $amount;
+        $data['TXN_AMOUNT'] = $amount->amount;
         $data['ORDER_ID'] = $order;
         $data['CHECKSUMHASH'] = getChecksumFromArray($data, PAYTM_MERCHANT_KEY);
          $response = $request->validate([
