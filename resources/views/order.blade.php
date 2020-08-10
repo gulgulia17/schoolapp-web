@@ -55,6 +55,7 @@
                  <div class="card-header bg-white">
                      <h3 class="text-danger">Oops..</h3>
                      <p>Its like you tried to order. <br> Please try again your payment has been failed.</p>
+                     <p>{{$response['RESPMSG']}}</p>
                  </div>
                  {{-- <div class="card-body">
                      <h3 class="font-weight-bold">

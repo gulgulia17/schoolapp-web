@@ -69,8 +69,8 @@ class PaytmController extends Controller
             "STATUS" => $request->STATUS,
             "RESPCODE" => $request->RESPCODE,
             "BANKNAME" => $request->BANKNAME,
+            "RESPMSG" => $request->RESPMSG
         ];
-        $checkData -> update($response);
         return view('order', compact('response'));
     }
 
