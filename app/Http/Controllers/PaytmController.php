@@ -59,7 +59,6 @@ class PaytmController extends Controller
     {
         $checkData = orderHistory::where('ORDERID', $request->ORDERID)->first();
         $data = $checkData->toArray();
-        Mail::to($checkData->email)->send(new OrderPlaceMail($data));
         $response = [
             "name"       => $checkData->name,
             "EMAIL"      => $checkData->email,
@@ -74,16 +73,17 @@ class PaytmController extends Controller
             "RESPMSG"    => $request->RESPMSG,
             "_token"     => csrf_token(),
         ];
-        // if ($request->RESPCODE == '01') {
+        if ($request->RESPCODE == '01') {
+            Mail::to($checkData->email)->send(new OrderPlaceMail($data));
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL,"http://127.0.0.1:8001/api/payment");
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($response));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $server_output = curl_exec($ch);
+            dd($server_output);
             curl_close ($ch);
-
-        // }
+        }
         return view('order', compact('response'));
     }
 
