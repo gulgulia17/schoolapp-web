@@ -25,6 +25,7 @@ class PaytmController extends Controller
      */
     public function index(Request $request)
     {
+        // dd($request['_token']);
         $amount = Plans::where('id', $request->subscription)->first();
         if(empty($amount)){
              return back()->with('error', 'Something Wrong');
@@ -60,22 +61,36 @@ class PaytmController extends Controller
         $data = $checkData->toArray();
         Mail::to($checkData->email)->send(new OrderPlaceMail($data));
         $response = [
-            "name" => $checkData->name,
-            "ORDERID" => $request->ORDERID,
-            "TXNID" => $request->TXNID,
-            "TXNAMOUNT" => $request->TXNAMOUNT,
-            "PAYMENTMODE" => $request->PAYMENTMODE,
-            "TXNDATE" => $request->TXNDATE,
-            "STATUS" => $request->STATUS,
-            "RESPCODE" => $request->RESPCODE,
-            "BANKNAME" => $request->BANKNAME,
-            "RESPMSG" => $request->RESPMSG
+            "name"       => $checkData->name,
+            "EMAIL"      => $checkData->email,
+            "ORDERID"    => $request->ORDERID,
+            "TXNID"      => $request->TXNID,
+            "TXNAMOUNT"  => $request->TXNAMOUNT,
+            "PAYMENTMODE"=> $request->PAYMENTMODE,
+            "TXNDATE"    => $request->TXNDATE,
+            "STATUS"     => $request->STATUS,
+            "RESPCODE"   => $request->RESPCODE,
+            "BANKNAME"   => $request->BANKNAME,
+            "RESPMSG"    => $request->RESPMSG,
+            "_token"     => csrf_token(),
         ];
+        // if ($request->RESPCODE == '01') {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL,"http://127.0.0.1:8001/api/payment");
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($response));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $server_output = curl_exec($ch);
+            dd($server_output);
+            curl_close ($ch);
+            
+        // }
         return view('order', compact('response'));
     }
 
     public function payment($data)
     {
+        // dd($data);
         $url = PAYTM_TXN_URL;
         $options = array(
             'http' => array(
@@ -84,11 +99,13 @@ class PaytmController extends Controller
                 'content' => http_build_query($data)
             )
         );
+        
         $context  = stream_context_create($options);
         $result = file_get_contents($url, false, $context);
         if ($result === FALSE) {
             print_r($result);
         }
         echo $result;
+        // echo $server_output;
     }
 }
