@@ -77,7 +77,6 @@ class PaytmController extends Controller
             "_token"     => csrf_token(),
         ];
         if ($request->RESPCODE == '01') {
-            return (new OrderPlaceMail($response))->render();
             Mail::to($checkData->email)->send(new OrderPlaceMail($response));
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, env('API_BACKEND'));
